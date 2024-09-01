@@ -265,9 +265,9 @@ void DDD::createEntities(rcl_node_t *node, rclc_support_t *support){
 	if (pMotorsAgent != NULL){
 		pMotorsAgent->createEntities(node, support);
 	}
-	if (pHCSR04Agent != NULL){
-		pHCSR04Agent->createEntities(node, support);
-	}
+	// if (pHCSR04Agent != NULL){
+	// 	pHCSR04Agent->createEntities(node, support);
+	// }
 	rclc_publisher_init_default(
 			&xPubOdom,
 			node,
@@ -290,9 +290,9 @@ void DDD::destroyEntities(rcl_node_t *node, rclc_support_t *support){
 	if (pMotorsAgent != NULL){
 		pMotorsAgent->destroyEntities(node, support);
 	}
-	if (pHCSR04Agent != NULL){
-		pHCSR04Agent->destroyEntities(node, support);
-	}
+	// if (pHCSR04Agent != NULL){
+	// 	pHCSR04Agent->destroyEntities(node, support);
+	// }
 	rcl_publisher_fini(&xPubOdom, node);
 	rcl_subscription_fini(&xSubTwist, 	node);
 }
@@ -306,9 +306,9 @@ uint DDD::getCount(){
 	if (pMotorsAgent != NULL){
 		res += pMotorsAgent->getCount();
 	}
-	if (pHCSR04Agent != NULL){
-		res += pHCSR04Agent->getCount();
-	}
+	// if (pHCSR04Agent != NULL){
+	// 	res += pHCSR04Agent->getCount();
+	// }
 	return res;
 }
 
@@ -321,9 +321,9 @@ uint DDD::getHandles(){
 	if (pMotorsAgent != NULL){
 		res += pMotorsAgent->getHandles();
 	}
-	if (pHCSR04Agent != NULL){
-		res += pHCSR04Agent->getHandles();
-	}
+	// if (pHCSR04Agent != NULL){
+	// 	res += pHCSR04Agent->getHandles();
+	// }
 	return res;
 }
 
@@ -462,7 +462,7 @@ void DDD::robotStop(){
 	}
 }
 
-void DDD::setHCSR04Agent(HCSR04Agent *p){
-	pHCSR04Agent = p;
-}
+// void DDD::setHCSR04Agent(HCSR04Agent *p){
+// 	pHCSR04Agent = p;
+// }
 

@@ -16,17 +16,17 @@
 #include "BlinkAgent.h"
 
 #include "uRosBridge.h"
-#include "PubEntities.h"
+// #include "PubEntities.h"
 
 #include "MotorsAgent.h"
 #include "DDD.h"
-#include "HCSR04Agent.h"
+// #include "HCSR04Agent.h"
 
 extern"C"{
 #include "pico/stdio/driver.h"
 #include "pico/stdio.h"
 #include "pico/stdio_usb.h"
-#include "pico/stdio_uart.h"
+// #include "pico/stdio_uart.h"
 }
 
 
@@ -116,12 +116,12 @@ void runTimeStats(   ){
  * @param params - unused
  */
 void mainTask(void *params){
-	BlinkAgent blink(BLINK_LED_PAD);
+	// BlinkAgent blink(BLINK_LED_PAD);
 
 	printf("Boot task started for %s\n", ROBOT_NAME);
 
 
-	blink.start("Blink", TASK_PRIORITY);
+	// blink.start("Blink", TASK_PRIORITY);
 
 	MotorsAgent motors;
 	motors.addMotor(0, LEFT_PWR_CW, LEFT_PWR_CCW,
@@ -131,14 +131,14 @@ void mainTask(void *params){
 	motors.configAllPID(KP, KI, KD);
 	motors.start("Motors", TASK_PRIORITY);
 
-	HCSR04Agent range;
-	range.addSensor(0, "range_front");
-	range.addSensor(18, "range_back");
-	range.start("Range", TASK_PRIORITY);
+	// HCSR04Agent range;
+	// range.addSensor(0, "range_front");
+	// range.addSensor(18, "range_back");
+	// range.start("Range", TASK_PRIORITY);
 
 	DDD ddd;
 	ddd.setMotorsAgent(&motors);
-	ddd.setHCSR04Agent(&range);
+	// ddd.setHCSR04Agent(&range);
 	ddd.start("DDD", TASK_PRIORITY);
 
 
@@ -213,7 +213,7 @@ void vLaunch( void) {
 int main( void ){
 	//Setup serial over UART and give a few seconds to settle before we start
     stdio_init_all();
-    stdio_filter_driver(&stdio_uart);
+    // stdio_filter_driver(&stdio_uart);
     sleep_ms(2000);
     printf("GO\n");
 

@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.12)
-
+cmake_minimum_required(VERSION 3.13)
+set(PICO_BOARD pico_w)
 # Change your executable name to something creative!
 set(NAME Motor) # <-- Name your project/executable here!
 

@@ -32,7 +32,7 @@ extern"C"{
 #include "pico/stdio/driver.h"
 #include "pico/stdio.h"
 #include "pico/stdio_usb.h"
-#include "pico/stdio_uart.h"
+// #include "pico/stdio_uart.h"
 
 #include "freertos_allocators.h"
 }

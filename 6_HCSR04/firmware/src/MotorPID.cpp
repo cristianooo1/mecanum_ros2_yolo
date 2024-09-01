@@ -47,8 +47,8 @@ void MotorPID::configPID(float kP, float kI, float kD){
 
 float MotorPID::doPID(){
 
-	// Throttle 1.0 = 320RPM
-	// Throttle 0.2 = 40RPM
+	// Throttle 1.0 = 100RPM
+	// Throttle 0.2 = 20RPM
 	float error ;
 	float sp, pv;
 	float p, i, d;
@@ -61,7 +61,7 @@ float MotorPID::doPID(){
 	//printf("PID err: %0.2f p: %0.2f\n", error, p);
 
 
-	float delt = pid / 320.0;
+	float delt = pid / 90.0; // 90% din RPMmax
 	float t = getThrottle() + delt;
 	//printf("d=%0.2f t=%0.2f\n", delt, t);
 	if (t < 0.0){

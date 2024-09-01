@@ -10,7 +10,7 @@
 
 #include "Agent.h"
 #include "MotorsAgent.h"
-#include "HCSR04Agent.h"
+// #include "HCSR04Agent.h"
 #include "uRosEntities.h"
 
 extern"C"{
@@ -51,7 +51,7 @@ public:
 
 	void setMotorsAgent(MotorsAgent *p);
 
-	void setHCSR04Agent(HCSR04Agent *p);
+	// void setHCSR04Agent(HCSR04Agent *p);
 
 
 	/***
@@ -121,7 +121,7 @@ private:
 	void robotStop();
 
 	MotorsAgent *pMotorsAgent = NULL;
-	HCSR04Agent *pHCSR04Agent = NULL;
+	// HCSR04Agent *pHCSR04Agent = NULL;
 
 	DDDOdom_t xMotorsOdom;
 	DDDOdom_t xDDDOdom;

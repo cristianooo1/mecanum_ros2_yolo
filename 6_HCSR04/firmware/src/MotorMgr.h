@@ -122,7 +122,7 @@ private:
 	int32_t xDeltaPos = 0;
 
 	// Number of ticks to track in total rotation
-	uint16_t xNumTicks=91;
+	uint16_t xNumTicks=632;
 
 	// Last position of switches
 	uint8_t xLast=0;

@@ -9,6 +9,25 @@
     <color rgba="0.8 0 0 1"/>
   </material>
 
+  <!-- Robot Base -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.001" radius="0.001"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <!-- Robot Footprint -->
+  <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_footprint"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  </joint>
+
   <link name="wheel_right">
     <visual>
       <geometry>
@@ -37,15 +56,6 @@
       </geometry>
       <material name="blue"/>
       <origin rpy="0 ${pi/2} 0" xyz="0 0 0"/>
-    </visual>
-  </link>
- 
-  <link name="base_link">
-    <visual>
-      <geometry>
-        <cylinder length="0.001" radius="0.001"/>
-      </geometry>
-      <material name="red"/>
     </visual>
   </link>
 
@@ -79,7 +89,7 @@
     </visual>
   </link>
   
-  <link name="range_front">
+  <!-- <link name="range_front">
     <visual>
       <geometry>
         <box size="0.018 0.045 0.025"/>
@@ -97,15 +107,7 @@
       <material name="red"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </visual>
-  </link>
-  
-  <link name="base_footprint"/>
-
-  <joint name="base_joint" type="fixed">
-    <parent link="base_link"/>
-    <child link="base_footprint"/>
-    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
-  </joint>
+  </link> -->
   
   
   <joint name="base_to_chassis" type="fixed">
@@ -150,19 +152,19 @@
     <axis xyz="0 0 1"/>
   </joint>
   
-  <joint name="motor_chassis_to_range_front" type="fixed">
+  <!-- <joint name="motor_chassis_to_range_front" type="fixed">
     <parent link="motor_chassis"/>
     <child link="range_front"/>
     <origin xyz="0.000 -0.030 -0.020" rpy="0 0 ${pi/-2}"/>
     <axis xyz="0 0 1"/>
   </joint>
   
-  <joint name="hassis_to_range_back" type="fixed">
+  <joint name="chassis_to_range_back" type="fixed">
     <parent link="chassis"/>
     <child link="range_back"/>
     <origin xyz="0.000 0.090 0.040" rpy="0 0 ${pi/2}"/>
     <axis xyz="0 0 1"/>
   </joint>
-  
+   -->
   
 </robot>

@@ -37,18 +37,29 @@ extern"C"{
 #define BLINK_LED_PAD	2
 #define CONN_LED_PAD	3
 
+//Front-Right Motor - MOTOR 0
+#define FRIGHT_PWR_CW	20
+#define FRIGHT_PWR_CCW	21
+#define FRIGHT_ROTENC_A 16 // Yellow
+#define FRIGHT_ROTENV_B	17 // Green
 
-//Left Motor
-#define LEFT_PWR_CW		9
-#define LEFT_PWR_CCW	8
-#define LEFT_ROTENC_A 	14
-#define LEFT_ROTENV_B	15
+//Front-Left Motor - MOTOR 1
+#define FLEFT_PWR_CW	19
+#define FLEFT_PWR_CCW	18
+#define FLEFT_ROTENC_A  0
+#define FLEFT_ROTENV_B	1
 
-//Right Motor
-#define RIGHT_PWR_CW	6
-#define RIGHT_PWR_CCW	7
-#define RIGHT_ROTENC_A 	12
-#define RIGHT_ROTENV_B	13
+//Back-Right Motor - MOTOR 2
+#define BRIGHT_PWR_CW	9
+#define BRIGHT_PWR_CCW	8
+#define BRIGHT_ROTENC_A 12
+#define BRIGHT_ROTENV_B	13
+
+//Back-Left Motor - MOTOR 3
+#define BLEFT_PWR_CW	6
+#define BLEFT_PWR_CCW	7
+#define BLEFT_ROTENC_A 	14
+#define BLEFT_ROTENV_B	15
 
 //PID
 #define KP	0.55
@@ -81,16 +92,16 @@ void runTimeStats(   ){
                                  &ulTotalRunTime );
 
 	 // Print stats
-	 for( x = 0; x < uxArraySize; x++ )
-	 {
-		 printf("Task: %d \t cPri:%d \t bPri:%d \t hw:%d \t%s\n",
-				pxTaskStatusArray[ x ].xTaskNumber ,
-				pxTaskStatusArray[ x ].uxCurrentPriority ,
-				pxTaskStatusArray[ x ].uxBasePriority ,
-				pxTaskStatusArray[ x ].usStackHighWaterMark ,
-				pxTaskStatusArray[ x ].pcTaskName
-				);
-	 }
+	//  for( x = 0; x < uxArraySize; x++ )
+	//  {
+	// 	 printf("Task: %d \t cPri:%d \t bPri:%d \t hw:%d \t%s\n",
+	// 			pxTaskStatusArray[ x ].xTaskNumber ,
+	// 			pxTaskStatusArray[ x ].uxCurrentPriority ,
+	// 			pxTaskStatusArray[ x ].uxBasePriority ,
+	// 			pxTaskStatusArray[ x ].usStackHighWaterMark ,
+	// 			pxTaskStatusArray[ x ].pcTaskName
+	// 			);
+	//  }
 
 
       // Free array
@@ -102,12 +113,12 @@ void runTimeStats(   ){
    //Get heap allocation information
    HeapStats_t heapStats;
    vPortGetHeapStats(&heapStats);
-   printf("HEAP avl: %d, blocks %d, alloc: %d, free: %d\n",
-		   heapStats.xAvailableHeapSpaceInBytes,
-		   heapStats.xNumberOfFreeBlocks,
-		   heapStats.xNumberOfSuccessfulAllocations,
-		   heapStats.xNumberOfSuccessfulFrees
-		   );
+//    printf("HEAP avl: %d, blocks %d, alloc: %d, free: %d\n",
+// 		   heapStats.xAvailableHeapSpaceInBytes,
+// 		   heapStats.xNumberOfFreeBlocks,
+// 		   heapStats.xNumberOfSuccessfulAllocations,
+// 		   heapStats.xNumberOfSuccessfulFrees
+// 		   );
 }
 
 
@@ -118,16 +129,21 @@ void runTimeStats(   ){
 void mainTask(void *params){
 	// BlinkAgent blink(BLINK_LED_PAD);
 
-	printf("Boot task started for %s\n", ROBOT_NAME);
+	// printf("Boot task started for %s\n", ROBOT_NAME);
 
 
 	// blink.start("Blink", TASK_PRIORITY);
 
 	MotorsAgent motors;
-	motors.addMotor(0, LEFT_PWR_CW, LEFT_PWR_CCW,
-			LEFT_ROTENC_A, LEFT_ROTENV_B);
-	motors.addMotor(1, RIGHT_PWR_CW, RIGHT_PWR_CCW,
-				RIGHT_ROTENC_A, RIGHT_ROTENV_B);
+
+	motors.addMotor(0, FRIGHT_PWR_CW, FRIGHT_PWR_CCW,
+			FRIGHT_ROTENC_A, FRIGHT_ROTENV_B);
+	motors.addMotor(1, FLEFT_PWR_CW, FLEFT_PWR_CCW,
+			FLEFT_ROTENC_A, FLEFT_ROTENV_B);
+	motors.addMotor(2, BRIGHT_PWR_CW, BRIGHT_PWR_CCW,
+			BRIGHT_ROTENC_A, BRIGHT_ROTENV_B);
+	motors.addMotor(3, BLEFT_PWR_CW, BLEFT_PWR_CCW,
+			BLEFT_ROTENC_A, BLEFT_ROTENV_B);
 	motors.configAllPID(KP, KI, KD);
 	motors.start("Motors", TASK_PRIORITY);
 
@@ -157,35 +173,38 @@ void mainTask(void *params){
 	bridge->start("Bridge",  TASK_PRIORITY+2);
 	//entities.start("PubSub", TASK_PRIORITY);
 
-	bool cw = false;
-	float rpm = 20.0;
-	float rps = 1.0;
+	// idk what this does!!!!!
+	// bool cw = false;
+	// float rpm = 50.0;
+	// float rps = 1.0;
 	for (;;){
 		vTaskDelay(10000);
 	}
 
-	for(;;){
-		printf("Set Speed %f dir %d\n", rpm, cw);
-		/*
-		motors.setSpeedRPM(0, rpm, cw);
-		motors.setSpeedRPM(1, rpm, !cw);
-		rpm += 20.0;
-		if (rpm > 200.0){
-			rpm = 100.0;
-		}
-		*/
+	// for(;;){
+	// 	// printf("Set Speed %f dir %d\n", rpm, cw);
+	// 	/*
+	// 	motors.setSpeedRPM(0, rpm, cw);
+	// 	motors.setSpeedRPM(1, rpm, !cw);
+	// 	rpm += 20.0;
+	// 	if (rpm > 200.0){
+	// 		rpm = 100.0;
+	// 	}
+	// 	*/
 
-		motors.setSpeedRadPS(0, rps, cw);
-		motors.setSpeedRadPS(1, rps, !cw);
-		rps += 1.0;
-		if (rps > 6){
-			rps = 1.0;
-		}
+	// 	// motors.setSpeedRadPS(0, rps, cw);
+	// 	// motors.setSpeedRadPS(1, rps, !cw);
+	// 	// motors.setSpeedRadPS(2, rps, cw);
+	// 	// motors.setSpeedRadPS(3, rps, !cw);
+	// 	// rps += 1.0;
+	// 	// if (rps > 6){
+	// 	// 	rps = 1.0;
+	// 	// }
 
-		cw = ! cw;
-		vTaskDelay(10000);
+	// 	// cw = ! cw;
+	// 	vTaskDelay(10000);
 
-	}
+	// }
 
 
 }
@@ -215,11 +234,11 @@ int main( void ){
     stdio_init_all();
     // stdio_filter_driver(&stdio_uart);
     sleep_ms(2000);
-    printf("GO\n");
+    // printf("GO\n");
 
     //Start tasks and scheduler
     const char *rtos_name = "FreeRTOS";
-    printf("Starting %s on core 0:\n", rtos_name);
+    // printf("Starting %s on core 0:\n", rtos_name);
     vLaunch();
 
 

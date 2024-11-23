@@ -24,7 +24,7 @@ extern"C"{
 }
 
 #ifndef NUM_MOTORS
-#define NUM_MOTORS 2
+#define NUM_MOTORS 4
 #endif
 
 class MotorsAgent : public Agent, public uRosEntities {

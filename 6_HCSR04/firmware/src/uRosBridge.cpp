@@ -49,7 +49,7 @@ uRosBridge::uRosBridge() {
             sizeof(PubCmd_t) );
 
 	if( xPubQ == NULL ){
-		printf("ERROR uRosBridge create Queue failed\n");
+		// printf("ERROR uRosBridge create Queue failed\n");
 	}
 
 }
@@ -103,7 +103,7 @@ void uRosBridge::run(){
 									cmd.msg,
 									NULL);
 							if (RCL_RET_OK != pubRet) {
-								printf("Queue Pub failed %d \n", pubRet);
+								// printf("Queue Pub failed %d \n", pubRet);
 								state = AGENT_DISCONNECTED;
 
 								cmd.entities->pubComplete(
@@ -168,7 +168,7 @@ void uRosBridge::uRosInit(){
 	freeRTOS_allocator.zero_allocate = __freertos_zero_allocate;
 
 	if (!rcutils_set_default_allocator(&freeRTOS_allocator)) {
-	  printf("Error on default allocators (line %d)\n",__LINE__);
+	//   printf("Error on default allocators (line %d)\n",__LINE__);
 	  return;
 	}
 
@@ -247,7 +247,7 @@ void uRosBridge::createEntities(){
 	}
 
 
-	printf("Created %d entities\n", count);
+	// printf("Created %d entities\n", count);
 
 	rclc_executor_init(&xExecutor, &xSupport.context, handles, &xAllocator);
 	rclc_executor_add_timer(&xExecutor, &xTimer);
@@ -259,7 +259,7 @@ void uRosBridge::createEntities(){
 
 	//Sync Time
 	if (RMW_RET_OK != rmw_uros_sync_session(5000)){
-		printf("ERROR Time synk failed\n");
+		// printf("ERROR Time synk failed\n");
 	}
 
 
@@ -283,7 +283,7 @@ void uRosBridge::createEntities(){
 		}
 	}
 
-	printf("Entities Created\n");
+	// printf("Entities Created\n");
 
 }
 
@@ -305,7 +305,7 @@ void uRosBridge::destroyEntities(){
 	rcl_node_fini(&xNode);
 	rclc_support_fini(&xSupport);
 
-	printf("Entities Destroyed\n");
+	// printf("Entities Destroyed\n");
 }
 
 /***

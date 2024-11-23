@@ -226,7 +226,7 @@ void MotorsAgent::initJointState(){
 		sprintf(name, "motor_%u", i);
 		if (!rosidl_runtime_c__String__assign(
 				&xJointStateMsg.name.data[i], name)){
-			printf("ERROR: Joined assignment failed\n");
+			// printf("ERROR: Joined assignment failed\n");
 		}
 	}
 	xJointStateMsg.name.size=NUM_MOTORS;
@@ -254,7 +254,7 @@ void MotorsAgent::pubJointState(){
 			&xJointStateMsg,
 			this,
 			NULL)){
-		printf("Joint Pub failed\n");
+		// printf("Joint Pub failed\n");
 	}
 }
 

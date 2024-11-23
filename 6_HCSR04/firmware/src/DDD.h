@@ -22,6 +22,7 @@ extern"C"{
 #include "rosidl_runtime_c/string_functions.h"
 #include "rosidl_runtime_c/primitives_sequence_functions.h"
 #include <geometry_msgs/msg/twist.h>
+//#include <geometry_msgs/msg/transform_stamped.h> //for tf publisher
 }
 
 #include <Eigen/Core>
@@ -29,7 +30,7 @@ extern"C"{
 
 //#define TWIST_DEBUG
 
-#define WHEEL_RADIUS   0.065
+#define WHEEL_RADIUS   0.025
 #define WHEEL_DEPTH    0.055
 #define WHEELS_SEP     0.204
 #define WHEELS_OFFSET  0.010 //To Y center of Robot
@@ -111,6 +112,11 @@ protected:
 
 private:
 
+	// tf2_ros::TransformBroadcaster tf_broadcaster;
+    // geometry_msgs__msg__TransformStamped tf_msg;
+
+	//void broadcastTf();
+
 	void updateOdom();
 
 	void publishOdom();
@@ -129,12 +135,16 @@ private:
 
 	uint32_t xLastVelocityTime = 0;
 
-	rcl_publisher_t 			xPubOdom;
-	nav_msgs__msg__Odometry 	xOdomMsg;
+	rcl_publisher_t 						xPubOdom;
+	nav_msgs__msg__Odometry 				xOdomMsg;
 
-	rcl_subscription_t 			xSubTwist;
-	uRosSubContext_t   			xSubTwistContext;
-	geometry_msgs__msg__Twist 	xTwistMsg;
+	// // Tf publisher
+	//rcl_publisher_t  						tf_publisher;
+    // geometry_msgs__msg__TransformStamped 	tf_msg;
+
+	rcl_subscription_t 						xSubTwist;
+	uRosSubContext_t   						xSubTwistContext;
+	geometry_msgs__msg__Twist 				xTwistMsg;
 
 	uint32_t xLastTwistTimestamp = 0;
 

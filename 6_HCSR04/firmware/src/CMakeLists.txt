@@ -9,7 +9,7 @@ add_executable(${NAME}
         MotorMgr.cpp
         MotorPID.cpp
         
-        PubEntities.cpp
+        # PubEntities.cpp
         MotorsAgent.cpp
         DDD.cpp
         # HCSR04Agent.cpp

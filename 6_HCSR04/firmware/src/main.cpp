@@ -38,28 +38,28 @@ extern"C"{
 #define CONN_LED_PAD	3
 
 //Front-Right Motor - MOTOR 0
-#define FRIGHT_PWR_CW	20
-#define FRIGHT_PWR_CCW	21
-#define FRIGHT_ROTENC_A 16 // Yellow
-#define FRIGHT_ROTENV_B	17 // Green
+#define FRIGHT_PWR_CW	8
+#define FRIGHT_PWR_CCW	9
+#define FRIGHT_ROTENC_A 14 // Yellow
+#define FRIGHT_ROTENV_B	15 // Green
 
 //Front-Left Motor - MOTOR 1
-#define FLEFT_PWR_CW	19
-#define FLEFT_PWR_CCW	18
-#define FLEFT_ROTENC_A  0
-#define FLEFT_ROTENV_B	1
+#define FLEFT_PWR_CW	21
+#define FLEFT_PWR_CCW	20
+#define FLEFT_ROTENC_A  16
+#define FLEFT_ROTENV_B	17
 
 //Back-Right Motor - MOTOR 2
-#define BRIGHT_PWR_CW	9
-#define BRIGHT_PWR_CCW	8
-#define BRIGHT_ROTENC_A 12
-#define BRIGHT_ROTENV_B	13
+#define BRIGHT_PWR_CW	7
+#define BRIGHT_PWR_CCW	6
+#define BRIGHT_ROTENC_A 0
+#define BRIGHT_ROTENV_B	1
 
 //Back-Left Motor - MOTOR 3
-#define BLEFT_PWR_CW	6
-#define BLEFT_PWR_CCW	7
-#define BLEFT_ROTENC_A 	14
-#define BLEFT_ROTENV_B	15
+#define BLEFT_PWR_CW	19
+#define BLEFT_PWR_CCW	26
+#define BLEFT_ROTENC_A 	27
+#define BLEFT_ROTENV_B	28
 
 //PID
 #define KP	0.55

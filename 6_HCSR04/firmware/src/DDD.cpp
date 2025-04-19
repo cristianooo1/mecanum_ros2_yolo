@@ -151,7 +151,7 @@ void DDD::updateOdom(){
 	double seconds = (double)(now - xLastVelocityTime) / 1000;
 	xLastVelocityTime = now;
 
-	double fr = dfr / seconds;
+	double fr = dfr / seconds; //rad/s
 	double fl = dfl / seconds;
 	double br = dbr / seconds;
 	double bl = dbl / seconds;
@@ -161,8 +161,22 @@ void DDD::updateOdom(){
     double omega_z = (WHEEL_RADIUS / (4.0 * (L + W))) * (-fl+fr-bl+br);  // Angular velocity (rotation) in rad/s
 
 	double theta = omega_z * seconds;
-	double deltax = (Vx * cos(theta) - Vy * sin(theta)) * seconds;
-	double deltay = (Vx * sin(theta) + Vy * cos(theta)) * seconds;
+
+	double phi = xMotorsOdom.a;
+
+	double phi_mid = phi + theta * 0.5;
+
+	double dx_b = Vx * seconds;
+	double dy_b = Vy * seconds;
+
+	double cos_phi = cos(phi_mid);
+	double sin_phi = sin(phi_mid);
+
+	double deltax = dx_b * cos_phi - dy_b * sin_phi;
+	double deltay = dx_b * sin_phi + dy_b * cos_phi;
+
+	// double deltax = (Vx * cos(theta) - Vy * sin(theta)) * seconds;
+	// double deltay = (Vx * sin(theta) + Vy * cos(theta)) * seconds;
 
 	xMotorsOdom.x += deltax;
 	xMotorsOdom.y += deltay;

@@ -9,26 +9,51 @@
     <color rgba="0.8 0 0 1"/>
   </material>
 
-  <!-- Robot Base -->
-  <link name="base_link">
+  <material name="green">
+    <color rgba="0.5 0.99 0.03 1"/>
+  </material>
+
+  <material name="pink">
+    <color rgba="1.0 0.7 0.8 1"/>
+  </material>
+
+  <link name="wheel_front_right">
     <visual>
       <geometry>
-        <cylinder length="0.001" radius="0.001"/>
+        <cylinder length="0.055" radius="0.065"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <link name="wheel_front_left">
+    <visual>
+      <geometry>
+        <cylinder length="0.055" radius="0.065"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <link name="wheel_back_right">
+    <visual>
+      <geometry>
+        <cylinder length="0.055" radius="0.065"/>
       </geometry>
       <material name="red"/>
     </visual>
   </link>
 
-  <!-- Robot Footprint -->
-  <link name="base_footprint"/>
-
-  <joint name="base_joint" type="fixed">
-    <parent link="base_link"/>
-    <child link="base_footprint"/>
-    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
-  </joint>
-
-  <link name="wheel_right">
+  <link name="wheel_back_left">
+    <visual>
+      <geometry>
+        <cylinder length="0.055" radius="0.065"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+ 
+  <!-- <link name="wheel_center">
     <visual>
       <geometry>
         <cylinder length="0.055" radius="0.065"/>
@@ -36,50 +61,28 @@
       <material name="blue"/>
       <origin rpy="0 ${pi/2} 0" xyz="0 0 0"/>
     </visual>
-  </link>
+  </link> -->
  
-
-  <link name="wheel_left">
+  <link name="base_link">
     <visual>
       <geometry>
-        <cylinder length="0.055" radius="0.065"/>
+        <cylinder length="0.1" radius="0.1"/>
       </geometry>
-      <material name="blue"/>
-      <origin rpy="0 ${pi/2} 0" xyz="0 0 0"/>
-    </visual>
-  </link>
- 
-  <link name="wheel_center">
-    <visual>
-      <geometry>
-        <cylinder length="0.055" radius="0.065"/>
-      </geometry>
-      <material name="blue"/>
-      <origin rpy="0 ${pi/2} 0" xyz="0 0 0"/>
+      <material name="green"/>
     </visual>
   </link>
 
   <link name="chassis">
     <visual>
       <geometry>
-        <box size="0.060 0.200 0.003"/>
+        <box size="0.290 0.185 0.004"/>
       </geometry>
-      <material name="red"/>
+      <material name="pink"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </visual>
   </link>
- 
-  <link name="motor_chassis">
-    <visual>
-      <geometry>
-        <box size="0.120 0.065 0.003"/>
-      </geometry>
-      <material name="red"/>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-    </visual>
-  </link>
-  
-  <link name="lidar">
+
+  <link name="laser">
     <visual>
         <geometry>
             <cylinder radius="0.05" length="0.04"/>
@@ -88,83 +91,80 @@
         <origin rpy="0 0 0" xyz="0 0 0"/>
     </visual>
   </link>
-  
-  <!-- <link name="range_front">
+
+  <link name="camera_link">
     <visual>
-      <geometry>
-        <box size="0.018 0.045 0.025"/>
-      </geometry>
-      <material name="red"/>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+            <box size="0.010 0.03 0.03"/>
+        </geometry>
+        <material name="red"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
     </visual>
   </link>
+
+  <link name="camera_link_optical"></link>
   
-  <link name="range_back">
-    <visual>
-      <geometry>
-        <box size="0.018 0.045 0.025"/>
-      </geometry>
-      <material name="red"/>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-    </visual>
-  </link> -->
+  <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_footprint"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  </joint>
   
   
   <joint name="base_to_chassis" type="fixed">
     <parent link="base_link"/>
     <child link="chassis"/>
-    <origin rpy="0 0 ${pi/2}" xyz="0 0 0.125"/>
+    <origin rpy="0 0 0" xyz="0 0 0.125"/>
     <axis xyz="0 0 1"/>
-  </joint>
-  
-  <joint name="chassis_to_motor_chassis" type="fixed">
-    <parent link="chassis"/>
-    <child link="motor_chassis"/>
-    <origin xyz="0 -0.120 -0.020"/>
-    <axis xyz="0 0 1"/>
-  </joint>
-  
-  <joint name="chassis_to_centre" type="fixed">
-    <parent link="chassis"/>
-    <child link="wheel_center"/>
-    <origin xyz="0 0.100 ${-0.060-0.020}"/>
-    <axis xyz="1 0 0"/>
   </joint>
   
   <joint name="motor_0" type="continuous">
-    <parent link="motor_chassis"/>
-    <child link="wheel_left"/>
-    <origin xyz="${0.204/-2} 0.00 -0.060"/>
-    <axis xyz="1 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_front_right"/>
+    <origin xyz="0.120 -0.140 0.0" rpy="1.57 0 0"/>
+    <axis xyz="0 0 1"/>
   </joint>
   
   <joint name="motor_1" type="continuous">
-    <parent link="motor_chassis"/>
-    <child link="wheel_right"/>
-    <origin xyz="${0.204/2} 0.00 -0.060" rpy="0 0 ${pi}"/>
-    <axis xyz="1 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_front_left"/>
+    <origin xyz="0.120 0.140 0.0" rpy="1.57 0 0"/>
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <joint name="motor_2" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_back_right"/>
+    <origin xyz="-0.120 -0.140 0.0" rpy="1.57 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  
+  <joint name="motor_3" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_back_left"/>
+    <origin xyz="-0.120 0.140 0.0" rpy="1.57 0 0"/>
+    <axis xyz="0 0 -1"/>
   </joint>
   
   <joint name="chassis_to_lidar" type="fixed">
     <parent link="chassis"/>
-    <child link="lidar"/>
-    <origin xyz="0.00 -0.065 0.09" rpy="0 0 ${pi/2}"/>
+    <child link="laser"/>
+    <origin xyz="-0.065 0.0 0.09" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
   </joint>
-  
-  <!-- <joint name="motor_chassis_to_range_front" type="fixed">
-    <parent link="motor_chassis"/>
-    <child link="range_front"/>
-    <origin xyz="0.000 -0.030 -0.020" rpy="0 0 ${pi/-2}"/>
-    <axis xyz="0 0 1"/>
-  </joint>
-  
-  <joint name="chassis_to_range_back" type="fixed">
+
+  <joint name="chassis_to_camera_link" type="fixed">
     <parent link="chassis"/>
-    <child link="range_back"/>
-    <origin xyz="0.000 0.090 0.040" rpy="0 0 ${pi/2}"/>
-    <axis xyz="0 0 1"/>
+    <child link="camera_link"/>
+    <origin xyz="0.065 0.0 0.09" rpy="0 0 0"/>
   </joint>
-   -->
+
+  <joint name="chassis_to_camera_link_optical" type="fixed">
+    <parent link="camera_link"/>
+    <child link="camera_link_optical"/>
+    <origin xyz="0.0 0.0 0.0" rpy="${-pi/2} 0 ${-pi/2}"/>
+  </joint>
   
 </robot>

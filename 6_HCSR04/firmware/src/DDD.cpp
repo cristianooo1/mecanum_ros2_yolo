@@ -516,44 +516,81 @@ void DDD::handleSubscriptionMsg(const void* msg, uRosSubContext_t* context){
         double v_rear_right = (vxx - vyy + wzz * (lxx + lyy)) / WHEEL_RADIUS;
 
 		// Set the motor speeds using calculated RPS (rad/s)
-		if(vxx > 0 && vyy == 0 && wzz == 0){
-			pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), true); // Front-right wheel
-        	pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), false);  // Front-left wheel
-			pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), true);  // Rear-right wheel
-			pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), false);    // Rear-left wheel
-		}
-		if(vxx < 0 && vyy == 0 && wzz == 0){
-			pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), false); // Front-right wheel
-        	pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), true);  // Front-left wheel
-			pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), false);  // Rear-right wheel
-			pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), true);    // Rear-left wheel
-		}
+		// if(vxx > 0 && vyy == 0 && wzz == 0){
+		// 	pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), true); // Front-right wheel
+        // 	pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), false);  // Front-left wheel
+		// 	pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), true);  // Rear-right wheel
+		// 	pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), false);    // Rear-left wheel
+		// }
+		// if(vxx < 0 && vyy == 0 && wzz == 0){
+		// 	pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), false); // Front-right wheel
+        // 	pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), true);  // Front-left wheel
+		// 	pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), false);  // Rear-right wheel
+		// 	pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), true);    // Rear-left wheel
+		// }
 
-		if(vyy > 0 && vxx == 0 && wzz == 0){
-			pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), true); // Front-right wheel
-        	pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), true);  // Front-left wheel
-			pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), false);  // Rear-right wheel
-			pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), false);    // Rear-left wheel
-		}
-		if(vyy < 0 && vxx == 0 && wzz == 0){
-			pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), false); // Front-right wheel
-        	pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), false);  // Front-left wheel
-			pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), true);  // Rear-right wheel
-			pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), true);    // Rear-left wheel
-		}
+		// if(vyy > 0 && vxx == 0 && wzz == 0){
+		// 	pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), true); // Front-right wheel
+        // 	pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), true);  // Front-left wheel
+		// 	pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), false);  // Rear-right wheel
+		// 	pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), false);    // Rear-left wheel
+		// }
+		// if(vyy < 0 && vxx == 0 && wzz == 0){
+		// 	pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), false); // Front-right wheel
+        // 	pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), false);  // Front-left wheel
+		// 	pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), true);  // Rear-right wheel
+		// 	pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), true);    // Rear-left wheel
+		// }
 
-		if(wzz > 0 && vxx == 0 && vyy == 0){
-			pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), false); // Front-right wheel
-        	pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), false);  // Front-left wheel
-			pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), false);  // Rear-right wheel
-			pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), false);    // Rear-left wheel
+		// if(wzz > 0 && vxx == 0 && vyy == 0){
+		// 	pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), false); // Front-right wheel
+        // 	pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), false);  // Front-left wheel
+		// 	pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), false);  // Rear-right wheel
+		// 	pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), false);    // Rear-left wheel
+		// }
+		// if(wzz < 0 && vxx == 0 && vyy == 0){
+		// 	pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), true); // Front-right wheel
+        // 	pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), true);  // Front-left wheel
+		// 	pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), true);  // Rear-right wheel
+		// 	pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), true);    // Rear-left wheel
+		// }
+
+		bool fr_direction;
+		if (v_front_right >= 0) {
+			fr_direction = true;  // CW
+		} else {
+			fr_direction = false; // CCW
 		}
-		if(wzz < 0 && vxx == 0 && vyy == 0){
-			pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), true); // Front-right wheel
-        	pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), true);  // Front-left wheel
-			pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), true);  // Rear-right wheel
-			pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), true);    // Rear-left wheel
+		
+		// Front-left wheel (motor 1)
+		bool fl_direction;
+		if (v_front_left >= 0) {
+			fl_direction = false; // CCW (inverted compared to right side)
+		} else {
+			fl_direction = true;  // CW (inverted compared to right side)
 		}
+		
+		// Rear-right wheel (motor 2)
+		bool rr_direction;
+		if (v_rear_right >= 0) {
+			rr_direction = true;  // CW
+		} else {
+			rr_direction = false; // CCW
+		}
+		
+		// Rear-left wheel (motor 3)
+		bool rl_direction;
+		if (v_rear_left >= 0) {
+			rl_direction = false; // CCW (inverted compared to right side)
+		} else {
+			rl_direction = true;  // CW (inverted compared to right side)
+		}
+    
+		// Set motor speeds and directions
+		pMotorsAgent->setSpeedRadPS(0, fabs(v_front_right), fr_direction);
+		pMotorsAgent->setSpeedRadPS(1, fabs(v_front_left), fl_direction);
+		pMotorsAgent->setSpeedRadPS(2, fabs(v_rear_right), rr_direction);
+		pMotorsAgent->setSpeedRadPS(3, fabs(v_rear_left), rl_direction);
 		
 		// if (pTwistMsg->linear.x == 0.0){
 		// 	//Have not move linearly to turn

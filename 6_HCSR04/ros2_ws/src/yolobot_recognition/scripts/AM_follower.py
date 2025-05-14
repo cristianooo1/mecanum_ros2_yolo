@@ -89,7 +89,7 @@ class ObjectFollower(Node):
         if abs(angle_to_object) > self.alignment_threshold:
             # Object is not aligned, need to rotate
             self.is_aligned = False
-            direction = -1.0 if angle_to_object > 0 else 1.0
+            direction = 1.0 if angle_to_object > 0 else -1.0
             
             # Calculate target angular velocity with proportional control and damping
             target_velocity = direction * min(

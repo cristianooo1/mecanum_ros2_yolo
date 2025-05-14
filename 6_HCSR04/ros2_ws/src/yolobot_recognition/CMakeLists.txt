@@ -42,8 +42,14 @@ install(
 
 install(
   PROGRAMS
+  scripts/pure_pursuit_omni.py
+  scripts/path_planning.py
+  scripts/AM_follower.py
+  scripts/detect_object_3D.py
   scripts/yolov8_ros2_pt.py
   scripts/yolov8_ros2_subscriber.py
+  scripts/yolov8_ros2_subscriber_NOU.py
+  scripts/yolov8_follower.py
   launch/launch_yolov8.launch.py
   DESTINATION lib/${PROJECT_NAME}
 )

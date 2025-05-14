@@ -16,7 +16,7 @@ class PurePursuitNode(Node):
         self.count = 0
         
         # Define waypoint threshold (distance to consider waypoint as reached)
-        self.waypoint_threshold = 0.1  # meters
+        self.waypoint_threshold = 0.05  # meters
         
         # Create subscribers
         self.odom_sub = self.create_subscription(
@@ -92,8 +92,8 @@ class PurePursuitNode(Node):
             delta_y = target_y - pose_y
             
         # Compute control commands (without angular velocity)
-        Kx = 0.5
-        Ky = 0.5
+        Kx = 1.5
+        Ky = 1.5
         
         # Create and send velocity command
         vel_msg = Twist()

@@ -112,3 +112,10 @@ ros2 run yolobot_recognition path_planning.py
 ros2 run yolobot_recognition pure_pursuit_omni.py
 ```
 
+## 🎥 Demo
+### Real-Time Inference–Based Navigation
+![](https://github.com/cristianooo1/mecanum_ros2_yolo/blob/main/gifs/inference_navigation_gif.gif)
+
+### Obstacle‑Aware Path Planning & Tracking
+![](https://github.com/cristianooo1/mecanum_ros2_yolo/blob/main/gifs/pathtracking_navigation_gif.gif)
+

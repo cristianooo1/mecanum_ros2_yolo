@@ -11,6 +11,14 @@ This project builds upon the excellent work of Jon Durrant and his “DDD Diff D
  - [**YouTube Playlist**](https://www.youtube.com/playlist?list=PLspDyukWAtRXbZAXrNu1SEL6Dzk7cjKYf)
 
 I adapted and extended Jon’s micro-ROS motor-control code to support a 4-wheel Mecanum configuration, redesigned the kinematics/odometry, and integrated a full ROS 2 navigation stack for omnidirectional autonomy.
+
+## 🎥 Demo
+### Real-Time Inference–Based Navigation
+![](https://github.com/cristianooo1/mecanum_ros2_yolo/blob/main/gifs/inference_navigation_gif.gif)
+
+### Obstacle‑Aware Path Planning & Tracking
+![](https://github.com/cristianooo1/mecanum_ros2_yolo/blob/main/gifs/pathtracking_navigation_gif.gif)
+
 ## 🔧 Hardware
 
 - **Chassis & Drive**  
@@ -111,11 +119,3 @@ ros2 run yolobot_recognition path_planning.py
 ```bash
 ros2 run yolobot_recognition pure_pursuit_omni.py
 ```
-
-## 🎥 Demo
-### Real-Time Inference–Based Navigation
-![](https://github.com/cristianooo1/mecanum_ros2_yolo/blob/main/gifs/inference_navigation_gif.gif)
-
-### Obstacle‑Aware Path Planning & Tracking
-![](https://github.com/cristianooo1/mecanum_ros2_yolo/blob/main/gifs/pathtracking_navigation_gif.gif)
-
